@@ -19,6 +19,7 @@
     "react-confetti": "^6.2.2",
     "react-dom": "^19.0.0",
     "react-hooks-global-state": "^2.0.0",
+    "react-use": "^17.6.0",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7"
   },
