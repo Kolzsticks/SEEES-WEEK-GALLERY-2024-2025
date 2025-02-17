@@ -11,7 +11,11 @@ export default async function Page({ params }: { params: Params }) {
   const resolvedParams = await params;
   const photoId = Number(resolvedParams.photoId); // Convert 
   // Fetch the list of images from the API
-  const response = await fetch("http://localhost:3000/api/images");
+  const baseUrl =
+          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+        const response = await fetch(`${baseUrl}/api/images`, {
+          cache: "force-cache",
+        });
   const photoData = await response.json();
 
   // Find the specific photo by photoId
