@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:"The SEEES Week community came together for an unforgettable celebration filled with engaging workshops, inspiring talks, and memorable moments.",
     images: [
       {
-        url: `${liveSite}/og.png?v=${Date.now()}`,
+        url: `${liveSite}/og~1.png?v=${Date.now()}`,
         width: 1200,
         height: 600,
         alt: "Lumen title image",
