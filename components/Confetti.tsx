@@ -1,45 +1,43 @@
-"use client"; // This must be a Client Component to use `useState` and hooks
+"use client"; // This must be a Client Component to use `useState`
 
 import { useState } from "react";
-import Confetti from "react-confetti"; // Import the react-confetti library
-import { useWindowSize } from "react-use"; // Import the useWindowSize hook
+import Confetti from "react-confetti-boom";
+import React from "react";
+import { createPortal } from "react-dom"; // Import createPortal for rendering outside the component
 
 export default function GalleryButton() {
-  const [isConfettiActive, setIsConfettiActive] = useState(false); // State to control confetti
-  const { width, height } = useWindowSize(); // Get window dimensions
+  const [isExploding, setIsExploding] = React.useState(false); // State to control confetti explosion
 
   // Handle button click to trigger confetti
   const handleCelebrate = () => {
-    setIsConfettiActive(true); // Activate confetti
+    setIsExploding(true); // Activate confetti explosion
 
-    // Deactivate confetti after 5 seconds
+    // Deactivate confetti after 3 seconds (default duration of the explosion)
     setTimeout(() => {
-      setIsConfettiActive(false);
-    }, 5000); // Confetti runs for 5 seconds
+      setIsExploding(false);
+    }, 10000); // Confetti explosion runs for 3 seconds
   };
 
   return (
     <>
-      {/* Confetti Component */}
-      {isConfettiActive && (
+      {/* Confetti Explosion Component */}
+      {isExploding && createPortal(
         <Confetti
-          width={width} // Set confetti to cover the entire screen
-          height={height}
-          recycle={false} // Stop confetti after animation
-          numberOfPieces={200} // Number of confetti pieces
-          colors={["#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5"]} // Custom colors
-        />
-      )}
+        particleCount={500}
+        shapeSize={12}
+        mode='boom'
+        colors={['#ff577f', '#ff884b', '#ffd384', '#781bbb']}
+       spreadDeg={360}
+        />,
+         document.body)}
 
       {/* Button */}
-      <a
+      <button
         className="pointer z-10 mt-6 rounded-lg border border-white bg-white px-3 py-2 text-sm font-semibold text-black transition hover:bg-white/10 hover:text-white md:mt-4"
-        href="#"
         onClick={handleCelebrate} // Trigger confetti on click
-        rel="noreferrer"
       >
         Celebrate the Moment! {/* Updated button text */}
-      </a>
+      </button>
     </>
   );
 }

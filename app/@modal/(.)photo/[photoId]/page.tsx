@@ -71,16 +71,16 @@ export default function Page({ params }: { params: Promise<Params> }) {
   };
 
   // Show skeleton loader while loading
-  if (isLoading || !images.length) {
-    return (
-      <Modal>
-        <div className="flex justify-center items-center h-full">
-          <Skeleton className="w-full h-[400px] rounded-lg lg:px-0 px-4" />{" "}
-          {/* Skeleton loader */}
-        </div>
-      </Modal>
-    );
-  }
+  // if (isLoading || !images.length) {
+  //   return (
+  //     <Modal>
+  //       <div className="flex justify-center items-center h-full">
+  //         <Skeleton className="w-full h-[400px] rounded-lg lg:px-0 px-4" />{" "}
+  //         {/* Skeleton loader */}
+  //       </div>
+  //     </Modal>
+  //   );
+  // }
 
   // Find the specific photo by photoId
   const photo = images[photoIdNumber];
@@ -104,18 +104,21 @@ export default function Page({ params }: { params: Promise<Params> }) {
           disabled={photoIdNumber === 0}
           className="absolute left-4 p-2  border-white border-2 text-white rounded-full hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <ChevronLeft/>
+          <ChevronLeft />
         </button>
-
-        {/* Image */}
-        <Image
-          src={`/SEEES Challenge Quest/${photo}`} // Ensure the path is correct
-          alt={`Photo ${photoIdNumber}`}
-          width={600} // Set appropriate width
-          height={400} // Set appropriate height
-          className="object-cover rounded-lg"
-          priority={true}
-        />
+        {isLoading ? (
+          <Skeleton className="w-full h-full rounded-lg" /> // Skeleton loader for the image
+        ) : (
+          <Image
+            src={`/SEEES Challenge Quest/${photo}`} // Ensure the path is correct
+            alt={`Photo ${photoIdNumber}`}
+            width={600} // Set appropriate width
+            height={400} // Set appropriate height
+            className="object-cover rounded-lg"
+            priority={true}
+            // onLoad={() => setIsLoading(false)} // Hide skeleton when image is loaded
+          />
+        )}
 
         {/* Next Button */}
         <button
