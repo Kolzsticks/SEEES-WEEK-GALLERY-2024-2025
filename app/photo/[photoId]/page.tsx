@@ -33,7 +33,9 @@ export default async function Page({ params }: { params: Params }) {
         alt={`Photo ${photoId}`}
         width={800}
         height={600}
+        quality={70}
         className="object-cover rounded-lg"
+        
       />
     </div>
   );

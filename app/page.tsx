@@ -72,7 +72,7 @@ export default async function Home() {
               height={480}
               src={`/SEEES Challenge Quest/${image}`}
               loading="lazy"
-              quality={75}
+              quality={50}
             />
           </Link>
         ))}

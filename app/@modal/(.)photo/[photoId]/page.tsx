@@ -3,7 +3,7 @@
 import { Modal } from "@/components/Modal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, use } from "react"; // Import `use` from React
+import React, { useEffect, useState, use } from "react"; // Import `use` from React
 import { Skeleton } from "@/components/ui/skeleton"; // Import the Skeleton component
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -13,6 +13,7 @@ type Params = {
 
 export default function Page({ params }: { params: Promise<Params> }) {
   const router = useRouter();
+  const [isImageLoading, setImageLoading] = React.useState(true)
 
   // Unwrap the params Promise using `React.use()`
   const { photoId } = use(params);
@@ -114,9 +115,10 @@ export default function Page({ params }: { params: Promise<Params> }) {
             alt={`Photo ${photoIdNumber}`}
             width={600} // Set appropriate width
             height={400} // Set appropriate height
-            className="object-cover rounded-lg"
+            className={`${isImageLoading ? 'blur' : 'remove-blur'} object-cover rounded-lg`}
             priority={true}
-            // onLoad={() => setIsLoading(false)} // Hide skeleton when image is loaded
+            quality={70}
+            onLoad={() => setImageLoading(false)}
           />
         )}
 
