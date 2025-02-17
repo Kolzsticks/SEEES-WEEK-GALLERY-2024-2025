@@ -13,7 +13,7 @@ type Params = {
 
 export default function Page({ params }: { params: Promise<Params> }) {
   const router = useRouter();
-  const [isImageLoading, setImageLoading] = React.useState(true)
+  const [isImageLoading, setImageLoading] = React.useState(true);
 
   // Unwrap the params Promise using `React.use()`
   const { photoId } = use(params);
@@ -103,24 +103,22 @@ export default function Page({ params }: { params: Promise<Params> }) {
         <button
           onClick={handlePrevious}
           disabled={photoIdNumber === 0}
-          className="absolute left-4 p-2  border-white border-2 text-white rounded-full hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute z-[200] left-4 p-2  border-white border-2 text-white rounded-full hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ChevronLeft />
         </button>
-        {isLoading ? (
-          <Skeleton className="w-full h-full rounded-lg" /> // Skeleton loader for the image
-        ) : (
-          <Image
-            src={`/SEEES Challenge Quest/${photo}`} // Ensure the path is correct
-            alt={`Photo ${photoIdNumber}`}
-            width={600} // Set appropriate width
-            height={400} // Set appropriate height
-            className={`${isImageLoading ? 'blur' : 'remove-blur'} object-cover rounded-lg`}
-            priority={true}
-            quality={70}
-            onLoad={() => setImageLoading(false)}
-          />
-        )}
+        <Image
+          src={`/SEEES Challenge Quest/${photo}`} // Ensure the path is correct
+          alt={`Photo ${photoIdNumber}`}
+          width={600} // Set appropriate width
+          height={400} // Set appropriate height
+          className={`${
+            isImageLoading ? "blur" : "remove-blur"
+          } object-cover rounded-lg`}
+          priority={true}
+          quality={70}
+          onLoad={() => setImageLoading(false)}
+        />
 
         {/* Next Button */}
         <button
