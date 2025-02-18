@@ -28,6 +28,7 @@ export default function GalleryButton() {
         mode='boom'
         colors={['#ff577f', '#ff884b', '#ffd384', '#781bbb']}
        spreadDeg={360}
+       effectCount={3}
         />,
          document.body)}
 

@@ -1,27 +1,24 @@
-"use client"; // This must be a Client Component to use `useRouter` and `React.use`
+"use client";
 
 import { Modal } from "@/components/Modal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState, use } from "react"; // Import `use` from React
-import { Skeleton } from "@/components/ui/skeleton"; // Import the Skeleton component
+import React, { useEffect, useState, use } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Params = {
-  photoId: string; // Match the dynamic route parameter name
+  photoId: string;
 };
 
 export default function Page({ params }: { params: Promise<Params> }) {
   const router = useRouter();
   const [isImageLoading, setImageLoading] = React.useState(true);
 
-  // Unwrap the params Promise using `React.use()`
   const { photoId } = use(params);
-  const photoIdNumber = Number(photoId); // Convert `photoId` to a number if needed
+  const photoIdNumber = Number(photoId);
 
-  // Fetch the list of images (client-side fetching)
   const [images, setImages] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(true); // Track loading state
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchImages() {
@@ -70,18 +67,6 @@ export default function Page({ params }: { params: Promise<Params> }) {
       router.replace(`/photo/${photoIdNumber + 1}`); // Use `replace` instead of `push`
     }
   };
-
-  // Show skeleton loader while loading
-  // if (isLoading || !images.length) {
-  //   return (
-  //     <Modal>
-  //       <div className="flex justify-center items-center h-full">
-  //         <Skeleton className="w-full h-[400px] rounded-lg lg:px-0 px-4" />{" "}
-  //         {/* Skeleton loader */}
-  //       </div>
-  //     </Modal>
-  //   );
-  // }
 
   // Find the specific photo by photoId
   const photo = images[photoIdNumber];
